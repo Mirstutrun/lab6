@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace lab6
-{ //Работает
+{ //Работает 1
     public partial class Form1 : Form
     {
         List<Emitter> emitters = new List<Emitter>();

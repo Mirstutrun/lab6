@@ -86,12 +86,7 @@ namespace lab6
                 }
             }
 
-            // добавил генерацию частиц
-            // генерирую не более 10 штук за тик
-
-            // второй цикл меняем на while, 
-            // этот новый цикл также будет срабатывать только в самом начале работы эмиттера
-            // собственно пока не накопится критическая масса частиц
+           
             while (particlesToCreate >= 1)
             {
                 particlesToCreate -= 1;
@@ -141,22 +136,7 @@ namespace lab6
         }
     }
 
-    public class TopEmitter : Emitter
-    {
-        public int Width; // длина экрана
-
-        public override void ResetParticle(Particle particle)
-        {
-            base.ResetParticle(particle); // вызываем базовый сброс частицы, там жизнь переопределяется и все такое
-
-            // а теперь тут уже подкручиваем параметры движения
-            particle.X = Particle.rand.Next(Width); // позиция X -- произвольная точка от 0 до Width
-            particle.Y = 0;  // ноль -- это верх экрана 
-
-            particle.SpeedY = 1; // падаем вниз по умолчанию
-            particle.SpeedX = Particle.rand.Next(-2, 2); // разброс влево и вправа у частиц 
-        }
-    }
+    
 
     public abstract class IImpactPoint
     {
@@ -242,19 +222,5 @@ namespace lab6
         }
     }
 
-    public class AntiGravityPoint : IImpactPoint
-    {
-        public int Power = 100; // сила отторжения
-
-        // а сюда по сути скопировали с минимальными правками то что было в UpdateState
-        public override void ImpactParticle(Particle particle)
-        {
-            float gX = X - particle.X;
-            float gY = Y - particle.Y;
-            float r2 = (float)Math.Max(100, gX * gX + gY * gY);
-
-            particle.SpeedX -= gX * Power / r2; // тут минусики вместо плюсов
-            particle.SpeedY -= gY * Power / r2; // и тут
-        }
-    }
+    
 }
